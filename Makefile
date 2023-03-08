@@ -1,8 +1,3 @@
-build:
-# TODO Replace `backend-go-repo-template` with repo name
-	CGO_ENABLED=0 GOOS=linux go build -a -o bin/backend-go-repo-template ./main.go
-
-# TODO If repo does not use a Docker Compose test environment these can be removed
 test_env_up:
 	docker-compose -f ./docker-compose.test.yml up -d --remove-orphans --build;
 	sleep 2;

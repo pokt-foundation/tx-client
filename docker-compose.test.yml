@@ -1,6 +1,17 @@
-# This Dockerfile only used for setting up a local Dockerized test environment for running E2E tests.
-# TODO If repo does not use a Docker Compose test environment this file can be removed
+# This Dockerfile only used for setting up a local Postgres DB for testing
 version: "3"
 
 services:
-# TODO - declare any services needed to run E2E tests here
+  test-database:
+    image: pocketfoundation/test-transaction-postgres:latest
+    container_name: test-transaction-http-db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: pgpassword
+      POSTGRES_DB: postgres
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 5s
+      retries: 3
