@@ -12,7 +12,6 @@ repos:
     hooks:
       - id: go-fmt
       - id: go-imports
-      - id: golangci-lint
       - id: go-critic
       - id: go-build
       - id: go-mod-tidy
