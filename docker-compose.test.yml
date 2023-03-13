@@ -2,9 +2,24 @@
 version: "3"
 
 services:
-  test-database:
-    image: pocketfoundation/test-transaction-postgres:latest
-    container_name: test-transaction-http-db
+  transaction-db-service:
+    # Update image manually on version bump
+    image: pocketfoundation/test-transaction-service:1.0.1
+    container_name: test-http-db
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      CONNECTION_STRING: postgres://postgres:pgpassword@transaction-db:5432/?sslmode=disable # pragma: allowlist secret
+      API_KEYS: test_api_key
+    depends_on:
+      transaction-db:
+        condition: service_healthy
+
+  transaction-db:
+    # Update image manually on version bump
+    image: pocketfoundation/test-transaction-postgres:1.2.0
+    container_name: transaction-http-db
     restart: always
     ports:
       - 5432:5432
