@@ -12,13 +12,20 @@ import (
 	"github.com/gojek/heimdall/v7/httpclient"
 )
 
+const defaultTimeout = 5 * time.Second
+
 // newHTTPClient creates a new heimdall HTTP client with retries and exponential backoff
 func newHTTPClient(config Config) *httpclient.Client {
 	backoff := heimdall.NewExponentialBackoff(2*time.Millisecond, 9*time.Millisecond, 2, 2*time.Millisecond)
 	retrier := heimdall.NewRetrier(backoff)
 
+	timeout := config.Timeout
+	if timeout == 0 {
+		timeout = defaultTimeout
+	}
+
 	return httpclient.NewClient(
-		httpclient.WithHTTPTimeout(config.Timeout),
+		httpclient.WithHTTPTimeout(timeout),
 		httpclient.WithRetryCount(config.Retries),
 		httpclient.WithRetrier(retrier),
 	)
