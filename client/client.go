@@ -24,7 +24,6 @@ var validAPIVersions = map[APIVersion]bool{
 type typePath string
 
 const (
-	errorPath   typePath = "error"
 	sessionPath typePath = "session"
 	regionPath  typePath = "region"
 	relayPath   typePath = "relay"
