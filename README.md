@@ -10,15 +10,6 @@
 </div>
 <br/>
 
-# Instructions For a New Repo
-
-1. Click the `Use this template` button, then click `Create a new repository` to create a new repo with the same file structure as this template.
-2. There are a number of comments marked with `TODO` throughout the repo; go through them all and update as appropriate, then remove the `TODO` comment.
-3. Replace all instances of `backend-go-repo-template` with the name of the new repo.
-4. Update this `README.md`
-5. Profit.
-
-
 # Development
 
 ## Pre-Commit Installation
