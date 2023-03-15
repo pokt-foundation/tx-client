@@ -1,19 +1,14 @@
 <div align="center">
     <img src=".github/banner.png" alt="Pocket Network logo" width="600"/>
-    <!-- TODO Rename header -->
-    <h1>Backend Go Repo Template</h1>
-    <big>Template repository for creating a new backend Go repo</big>
+    <h1>Pocket Transaction HTTP DB Client</h1>
     <div>
     <br/>
-    <!-- TODO Replace `backend-go-repo-template` with repo name -->
-        <a href="https://github.com/pokt-foundation/backend-go-repo-template/pulse"><img src="https://img.shields.io/github/last-commit/pokt-foundation/backend-go-repo-template.svg"/></a>
-        <a href="https://github.com/pokt-foundation/backend-go-repo-template/pulls"><img src="https://img.shields.io/github/issues-pr/pokt-foundation/backend-go-repo-template.svg"/></a>
-        <a href="https://github.com/pokt-foundation/backend-go-repo-template/issues"><img src="https://img.shields.io/github/issues-closed/pokt-foundation/backend-go-repo-template.svg"/></a>
+        <a href="https://github.com/pokt-foundation/tx-client/pulse"><img src="https://img.shields.io/github/last-commit/pokt-foundation/tx-client.svg"/></a>
+        <a href="https://github.com/pokt-foundation/tx-client/pulls"><img src="https://img.shields.io/github/issues-pr/pokt-foundation/tx-client.svg"/></a>
+        <a href="https://github.com/pokt-foundation/tx-client/issues"><img src="https://img.shields.io/github/issues-closed/pokt-foundation/tx-client.svg"/></a>
     </div>
 </div>
 <br/>
-
-  <!-- TODO Replace this section with a README.md describing the new repo -->
 
 # Instructions For a New Repo
 
@@ -23,7 +18,6 @@
 4. Update this `README.md`
 5. Profit.
 
-  <!-- TODO Update the nelow section with development instructions (leave the pre-commit section in place) -->
 
 # Development
 
