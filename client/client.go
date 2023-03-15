@@ -81,8 +81,12 @@ func (db TXClient) CreateRegion(region types.PortalRegion) error {
 	return err
 }
 
-func (db TXClient) CreateRelay(region types.Relay) error {
-	body, err := json.Marshal(region)
+func (db TXClient) CreateRelay(relay types.Relay) error {
+	if err := relay.Validate(); err != nil {
+		return err
+	}
+
+	body, err := json.Marshal(relay)
 	if err != nil {
 		return err
 	}
