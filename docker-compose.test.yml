@@ -3,8 +3,7 @@ version: "3"
 
 services:
   transaction-db-service:
-    # Update image manually on version bump
-    image: pocketfoundation/test-transaction-service:1.0.1
+    image: pocketfoundation/test-transaction-service:latest
     container_name: test-http-db
     restart: always
     ports:
@@ -17,8 +16,7 @@ services:
         condition: service_healthy
 
   transaction-db:
-    # Update image manually on version bump
-    image: pocketfoundation/test-transaction-postgres:1.2.0
+    image: pocketfoundation/test-transaction-postgres:latest
     container_name: transaction-http-db
     restart: always
     ports:
