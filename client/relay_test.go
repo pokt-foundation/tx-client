@@ -21,7 +21,7 @@ func (ts *txClientTestSuite) TestClient_WriteRelay() {
 				PoktNodeAddress:          "21",
 				RelayStartDatetime:       time.Now(),
 				RelayReturnDatetime:      time.Now(),
-				IsError:                  true,
+				IsError:                  false,
 				RelayRoundtripTime:       1,
 				RelayChainMethodID:       21,
 				RelayDataSize:            21,
