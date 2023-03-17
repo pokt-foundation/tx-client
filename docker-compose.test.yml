@@ -3,7 +3,7 @@ version: "3"
 
 services:
   transaction-db-service:
-    image: pocketfoundation/test-transaction-service:latest
+    image: pocketfoundation/transaction-http-db:latest
     container_name: test-http-db
     restart: always
     ports:
@@ -11,6 +11,7 @@ services:
     environment:
       CONNECTION_STRING: postgres://postgres:pgpassword@transaction-db:5432/?sslmode=disable # pragma: allowlist secret
       API_KEYS: test_api_key
+      MAX_BATCH_SIZE: 1
     depends_on:
       transaction-db:
         condition: service_healthy
