@@ -33,7 +33,7 @@ type TXDBClient interface {
 	CreateSession(types.PocketSession) error
 	CreateRegion(types.PortalRegion) error
 	CreateRelay(types.Relay) error
-	GetRelay(int64) (types.Relay, error)
+	GetRelay(int) (types.Relay, error)
 }
 
 var _ TXDBClient = TXClient{}
@@ -95,7 +95,7 @@ func (db TXClient) CreateRelay(relay types.Relay) error {
 	return err
 }
 
-func (db TXClient) GetRelay(id int64) (types.Relay, error) {
+func (db TXClient) GetRelay(id int) (types.Relay, error) {
 	path := fmt.Sprintf("%s/%d", db.versionedBasePath(relayPath), id)
 	return performHttpReq[types.Relay](http.MethodGet, path, db.headers, nil, db.httpClient)
 }
