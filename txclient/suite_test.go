@@ -24,9 +24,8 @@ func (ts *txClientTestSuite) SetupSuite() {
 	ts.NoError(ts.initClient())
 
 	ts.NoError(ts.client.CreateSession(types.PocketSession{
-		SessionKey:            "abc",
-		SessionHeight:         22,
-		ProtocolApplicationID: 22,
+		SessionKey:    "abc",
+		SessionHeight: 22,
 	}))
 
 	ts.NoError(ts.client.CreateRegion(types.PortalRegion{
@@ -34,21 +33,27 @@ func (ts *txClientTestSuite) SetupSuite() {
 	}))
 
 	ts.NoError(ts.client.CreateRelay(types.Relay{
-		ChainID:                  21,
-		EndpointID:               21,
+		PoktChainID:              "0001",
+		ProtocolAppPublicKey:     "22",
+		EndpointID:               "21",
 		SessionKey:               "abc",
 		PoktNodeAddress:          "21",
 		RelayStartDatetime:       time.Date(199, time.July, 21, 0, 0, 0, 0, time.Local),
 		RelayReturnDatetime:      time.Date(199, time.July, 21, 0, 0, 0, 0, time.Local),
 		IsError:                  false,
 		RelayRoundtripTime:       1,
-		RelayChainMethodID:       21,
+		RelayChainMethodIDs:      []string{"eth_getLogs"},
 		RelayDataSize:            21,
 		RelayPortalTripTime:      21,
 		RelayNodeTripTime:        21,
 		RelayURLIsPublicEndpoint: false,
-		PortalOriginRegionID:     1,
+		PortalRegionName:         "Los Praditos",
 		IsAltruistRelay:          false,
+		RelaySourceURL:           "example.com",
+		PoktNodeDomain:           "node.com",
+		PoktNodePublicKey:        "1234",
+		RequestID:                "1234",
+		PoktTxID:                 "1234",
 	}))
 
 	dbRelay, err := ts.client.GetRelay(1)
