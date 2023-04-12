@@ -27,12 +27,14 @@ const (
 	sessionPath typePath = "session"
 	regionPath  typePath = "region"
 	relayPath   typePath = "relay"
+	relaysPath  typePath = "relays"
 )
 
 type TXDBClient interface {
 	CreateSession(types.PocketSession) error
 	CreateRegion(types.PortalRegion) error
 	CreateRelay(types.Relay) error
+	CreateRelays([]types.Relay) error
 	GetRelay(int) (types.Relay, error)
 }
 
@@ -92,6 +94,22 @@ func (db TXClient) CreateRelay(relay types.Relay) error {
 	}
 
 	_, err = performHttpReq[any](http.MethodPost, db.versionedBasePath(relayPath), db.headers, body, db.httpClient)
+	return err
+}
+
+func (db TXClient) CreateRelays(relays []types.Relay) error {
+	for _, relay := range relays {
+		if err := relay.Validate(); err != nil {
+			return err
+		}
+	}
+
+	body, err := json.Marshal(relays)
+	if err != nil {
+		return err
+	}
+
+	_, err = performHttpReq[any](http.MethodPost, db.versionedBasePath(relaysPath), db.headers, body, db.httpClient)
 	return err
 }
 
