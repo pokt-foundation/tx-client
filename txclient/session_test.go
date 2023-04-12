@@ -11,9 +11,8 @@ func (ts *txClientTestSuite) TestClient_WriteSession() {
 		{
 			name: "success writing a session",
 			session: types.PocketSession{
-				SessionKey:        "abcd",
-				SessionHeight:     10,
-				ProtocolPublicKey: "10",
+				SessionKey:    "abcd",
+				SessionHeight: 10,
 			},
 			err: nil,
 		},

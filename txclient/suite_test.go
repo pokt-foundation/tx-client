@@ -24,9 +24,8 @@ func (ts *txClientTestSuite) SetupSuite() {
 	ts.NoError(ts.initClient())
 
 	ts.NoError(ts.client.CreateSession(types.PocketSession{
-		SessionKey:        "abc",
-		SessionHeight:     22,
-		ProtocolPublicKey: "22",
+		SessionKey:    "abc",
+		SessionHeight: 22,
 	}))
 
 	ts.NoError(ts.client.CreateRegion(types.PortalRegion{
@@ -35,6 +34,7 @@ func (ts *txClientTestSuite) SetupSuite() {
 
 	ts.NoError(ts.client.CreateRelay(types.Relay{
 		PoktChainID:              "0001",
+		ProtocolAppPublicKey:     "22",
 		EndpointID:               "21",
 		SessionKey:               "abc",
 		PoktNodeAddress:          "21",
