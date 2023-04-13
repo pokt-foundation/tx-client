@@ -10,9 +10,10 @@ import (
 
 type txClientTestSuite struct {
 	suite.Suite
-	client TXDBClient
+	client TxClientRW
 	// Use to reference primary keys constraints
 	relay types.Relay
+	sr    types.ServiceRecord
 }
 
 func Test_RunTXClientTestSuite(t *testing.T) {
@@ -56,10 +57,31 @@ func (ts *txClientTestSuite) SetupSuite() {
 		PoktTxID:                 "1234",
 	}))
 
+	ts.NoError(ts.client.CreateServiceRecord(types.ServiceRecord{
+		NodePublicKey:          "123",
+		PoktChainID:            "0001",
+		SessionKey:             "abc",
+		RequestID:              "123",
+		PortalRegionName:       "Los Praditos",
+		Latency:                0.112,
+		Tickets:                10,
+		Result:                 "result",
+		Available:              true,
+		Successes:              100,
+		Failures:               1,
+		P90SuccessLatency:      0.05,
+		MedianSuccessLatency:   0.09,
+		WeightedSuccessLatency: 0.1,
+		SuccessRate:            0.9,
+	}))
+
 	dbRelay, err := ts.client.GetRelay(1)
 	ts.NoError(err)
-
 	ts.relay = dbRelay
+
+	sr, err := ts.client.GetServiceRecord(1)
+	ts.NoError(err)
+	ts.sr = sr
 }
 
 func (ts *txClientTestSuite) initClient() error {

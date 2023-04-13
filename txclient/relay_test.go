@@ -17,7 +17,7 @@ func (ts *txClientTestSuite) TestClient_WriteRelay() {
 			name: "success writing a single relay",
 			relay: types.Relay{
 				PoktChainID:              "0001",
-				ProtocolAppPublicKey:     "22",
+				ProtocolAppPublicKey:     "unit",
 				EndpointID:               "21",
 				SessionKey:               ts.relay.SessionKey,
 				PoktNodeAddress:          "21",
