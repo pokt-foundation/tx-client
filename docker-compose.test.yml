@@ -11,8 +11,8 @@ services:
     environment:
       CONNECTION_STRING: postgres://postgres:pgpassword@transaction-db:5432/?sslmode=disable # pragma: allowlist secret
       API_KEYS: test_api_key
-      MAX_SERVICE_RECORD_BATCH_SIZE: 1
       MAX_RELAY_BATCH_SIZE: 1
+      MAX_SERVICE_RECORD_BATCH_SIZE: 1
     depends_on:
       transaction-db:
         condition: service_healthy
