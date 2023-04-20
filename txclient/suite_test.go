@@ -82,7 +82,7 @@ func (ts *txClientTestSuite) SetupSuite() {
 	// write endpoints for relays and service records in transaction-http-db return
 	// before saving to the db, which may end up in the test failing due to fecthing
 	// an item before being stored.
-	time.Sleep(5 * time.Millisecond)
+	time.Sleep(500 * time.Millisecond)
 
 	dbRelay, err := ts.client.GetRelay(1)
 	ts.NoError(err)
