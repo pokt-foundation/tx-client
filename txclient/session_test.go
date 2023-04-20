@@ -11,8 +11,9 @@ func (ts *txClientTestSuite) TestClient_WriteSession() {
 		{
 			name: "success writing a session",
 			session: types.PocketSession{
-				SessionKey:    "abcd",
-				SessionHeight: 10,
+				SessionKey:       "abcd",
+				SessionHeight:    10,
+				PortalRegionName: ts.region,
 			},
 			err: nil,
 		},

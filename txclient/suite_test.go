@@ -12,8 +12,9 @@ type txClientTestSuite struct {
 	suite.Suite
 	client TxClientRW
 	// Use to reference primary keys constraints
-	relay types.Relay
-	sr    types.ServiceRecord
+	relay  types.Relay
+	sr     types.ServiceRecord
+	region string
 }
 
 func Test_RunTXClientTestSuite(t *testing.T) {
@@ -24,13 +25,16 @@ func Test_RunTXClientTestSuite(t *testing.T) {
 func (ts *txClientTestSuite) SetupSuite() {
 	ts.NoError(ts.initClient())
 
-	ts.NoError(ts.client.CreateSession(types.PocketSession{
-		SessionKey:    "abc",
-		SessionHeight: 22,
-	}))
+	ts.region = "region"
 
 	ts.NoError(ts.client.CreateRegion(types.PortalRegion{
-		PortalRegionName: "Los Praditos",
+		PortalRegionName: ts.region,
+	}))
+
+	ts.NoError(ts.client.CreateSession(types.PocketSession{
+		SessionKey:       "abc",
+		SessionHeight:    22,
+		PortalRegionName: ts.region,
 	}))
 
 	ts.NoError(ts.client.CreateRelay(types.Relay{
@@ -48,7 +52,7 @@ func (ts *txClientTestSuite) SetupSuite() {
 		RelayPortalTripTime:      21,
 		RelayNodeTripTime:        21,
 		RelayURLIsPublicEndpoint: false,
-		PortalRegionName:         "Los Praditos",
+		PortalRegionName:         ts.region,
 		IsAltruistRelay:          false,
 		RelaySourceURL:           "example.com",
 		PoktNodeDomain:           "node.com",
@@ -62,7 +66,7 @@ func (ts *txClientTestSuite) SetupSuite() {
 		PoktChainID:            "0001",
 		SessionKey:             "abc",
 		RequestID:              "123",
-		PortalRegionName:       "Los Praditos",
+		PortalRegionName:       ts.region,
 		Latency:                0.112,
 		Tickets:                10,
 		Result:                 "result",
