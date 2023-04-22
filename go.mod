@@ -1,4 +1,3 @@
-// TODO - rename repository
 module github.com/pokt-foundation/tx-client
 
 go 1.20
