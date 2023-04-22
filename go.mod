@@ -16,6 +16,6 @@ require (
 require (
 	github.com/gojek/heimdall v5.0.2+incompatible
 	github.com/gojek/heimdall/v7 v7.0.2
-	github.com/pokt-foundation/transaction-db v1.7.0
+	github.com/pokt-foundation/transaction-db v1.8.2
 	github.com/stretchr/testify v1.8.2
 )
