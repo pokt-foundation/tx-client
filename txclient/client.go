@@ -36,9 +36,9 @@ type TxClientWrite interface {
 	CreateSession(types.PocketSession) error
 	CreateRegion(types.PortalRegion) error
 	CreateRelay(types.Relay) error
-	CreateRelays([]*types.Relay) error
+	CreateRelays([]types.Relay) error
 	CreateServiceRecord(types.ServiceRecord) error
-	CreateServiceRecords([]*types.ServiceRecord) error
+	CreateServiceRecords([]types.ServiceRecord) error
 }
 
 type TxClientRead interface {
@@ -110,7 +110,7 @@ func (db TXClient) CreateRelay(relay types.Relay) error {
 	return err
 }
 
-func (db TXClient) CreateRelays(relays []*types.Relay) error {
+func (db TXClient) CreateRelays(relays []types.Relay) error {
 	for _, relay := range relays {
 		if err := relay.Validate(); err != nil {
 			return err
@@ -140,7 +140,7 @@ func (db TXClient) CreateServiceRecord(sr types.ServiceRecord) error {
 	return err
 }
 
-func (db TXClient) CreateServiceRecords(srs []*types.ServiceRecord) error {
+func (db TXClient) CreateServiceRecords(srs []types.ServiceRecord) error {
 	for _, record := range srs {
 		if err := record.Validate(); err != nil {
 			return err
