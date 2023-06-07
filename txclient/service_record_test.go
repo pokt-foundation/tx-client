@@ -42,12 +42,12 @@ func (ts *txClientTestSuite) TestClient_WriteServiceRecord() {
 func (ts *txClientTestSuite) TestClient_WriteServiceRecords() {
 	tests := []struct {
 		name string
-		srs  []types.ServiceRecord
+		srs  []*types.ServiceRecord
 		err  error
 	}{
 		{
 			name: "success writing multiple service records",
-			srs: []types.ServiceRecord{
+			srs: []*types.ServiceRecord{
 				{
 					NodePublicKey:          "123",
 					PoktChainID:            "0001",

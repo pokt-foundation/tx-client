@@ -50,12 +50,12 @@ func (ts *txClientTestSuite) TestClient_WriteRelay() {
 func (ts *txClientTestSuite) TestClient_WriteRelays() {
 	tests := []struct {
 		name   string
-		relays []types.Relay
+		relays []*types.Relay
 		err    error
 	}{
 		{
 			name: "success writing multiple relays",
-			relays: []types.Relay{{
+			relays: []*types.Relay{{
 				PoktChainID:              "0001",
 				ProtocolAppPublicKey:     "22",
 				EndpointID:               "21",
