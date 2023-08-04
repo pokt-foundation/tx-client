@@ -9,7 +9,7 @@ services:
     ports:
       - 8080:8080
     environment:
-      CONNECTION_STRING: postgres://postgres:pgpassword@transaction-db:5432/?sslmode=disable # pragma: allowlist secret
+      CONNECTION_STRING: postgres://postgres:pgpassword@transaction-db-http:5432/?sslmode=disable # pragma: allowlist secret
       API_KEYS: test_api_key
       MAX_RELAY_BATCH_SIZE: 1
       MAX_SERVICE_RECORD_BATCH_SIZE: 1
@@ -17,9 +17,25 @@ services:
       transaction-db:
         condition: service_healthy
 
+  # DB Used for http client tests
+  transaction-db-http:
+    image: pocketfoundation/test-transaction-postgres:latest
+    container_name: transaction-db-http
+    restart: always
+    ports:
+      - 5433:5432
+    environment:
+      POSTGRES_PASSWORD: pgpassword
+      POSTGRES_DB: postgres
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 5s
+      retries: 3
+
+  # DB Used for db client tests
   transaction-db:
     image: pocketfoundation/test-transaction-postgres:latest
-    container_name: transaction-http-db
+    container_name: transaction-db
     restart: always
     ports:
       - 5432:5432

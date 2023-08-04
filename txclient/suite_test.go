@@ -94,7 +94,7 @@ func (ts *txClientTestSuite) SetupSuite() {
 }
 
 func (ts *txClientTestSuite) initClient() error {
-	client, err := NewTXClient(Config{
+	client, err := NewHttpClient(Config{
 		BaseURL: "http://localhost:8080",
 		APIKey:  "test_api_key",
 		Version: V0,
