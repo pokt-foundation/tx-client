@@ -51,20 +51,20 @@ type TxClientRW interface {
 	TxClientWrite
 }
 
-var _ TxClientRW = TXClient{}
+var _ TxClientRW = HttpClient{}
 
-type TXClient struct {
+type HttpClient struct {
 	httpClient *httpclient.Client
 	config     Config
 	headers    http.Header
 }
 
-func NewTXClient(config Config) (*TXClient, error) {
+func NewHttpClient(config Config) (*HttpClient, error) {
 	if err := config.validate(); err != nil {
-		return &TXClient{}, err
+		return &HttpClient{}, err
 	}
 
-	return &TXClient{
+	return &HttpClient{
 		httpClient: newHTTPClient(config),
 		config:     config,
 		headers:    http.Header{"Authorization": {config.APIKey}, "Content-Type": {"application/json"}},
@@ -72,11 +72,11 @@ func NewTXClient(config Config) (*TXClient, error) {
 }
 
 // versionedBasePath returns the base path for a given data type eg. `https://pocket.http-db-url.com/v1/application`
-func (db TXClient) versionedBasePath(dataTypePath typePath) string {
+func (db HttpClient) versionedBasePath(dataTypePath typePath) string {
 	return fmt.Sprintf("%s/%s/%s", db.config.BaseURL, db.config.Version, dataTypePath)
 }
 
-func (db TXClient) CreateSession(session types.PocketSession) error {
+func (db HttpClient) CreateSession(session types.PocketSession) error {
 	body, err := json.Marshal(session)
 	if err != nil {
 		return err
@@ -86,7 +86,7 @@ func (db TXClient) CreateSession(session types.PocketSession) error {
 	return err
 }
 
-func (db TXClient) CreateRegion(region types.PortalRegion) error {
+func (db HttpClient) CreateRegion(region types.PortalRegion) error {
 	body, err := json.Marshal(region)
 	if err != nil {
 		return err
@@ -96,7 +96,7 @@ func (db TXClient) CreateRegion(region types.PortalRegion) error {
 	return err
 }
 
-func (db TXClient) CreateRelay(relay types.Relay) error {
+func (db HttpClient) CreateRelay(relay types.Relay) error {
 	if err := relay.Validate(); err != nil {
 		return err
 	}
@@ -110,7 +110,7 @@ func (db TXClient) CreateRelay(relay types.Relay) error {
 	return err
 }
 
-func (db TXClient) CreateRelays(relays []types.Relay) error {
+func (db HttpClient) CreateRelays(relays []types.Relay) error {
 	for _, relay := range relays {
 		if err := relay.Validate(); err != nil {
 			return err
@@ -126,7 +126,7 @@ func (db TXClient) CreateRelays(relays []types.Relay) error {
 	return err
 }
 
-func (db TXClient) CreateServiceRecord(sr types.ServiceRecord) error {
+func (db HttpClient) CreateServiceRecord(sr types.ServiceRecord) error {
 	if err := sr.Validate(); err != nil {
 		return err
 	}
@@ -140,7 +140,7 @@ func (db TXClient) CreateServiceRecord(sr types.ServiceRecord) error {
 	return err
 }
 
-func (db TXClient) CreateServiceRecords(srs []types.ServiceRecord) error {
+func (db HttpClient) CreateServiceRecords(srs []types.ServiceRecord) error {
 	for _, record := range srs {
 		if err := record.Validate(); err != nil {
 			return err
@@ -156,12 +156,12 @@ func (db TXClient) CreateServiceRecords(srs []types.ServiceRecord) error {
 	return err
 }
 
-func (db TXClient) GetRelay(id int) (types.Relay, error) {
+func (db HttpClient) GetRelay(id int) (types.Relay, error) {
 	path := fmt.Sprintf("%s/%d", db.versionedBasePath(relayPath), id)
 	return performHttpReq[types.Relay](http.MethodGet, path, db.headers, nil, db.httpClient)
 }
 
-func (db TXClient) GetServiceRecord(id int) (types.ServiceRecord, error) {
+func (db HttpClient) GetServiceRecord(id int) (types.ServiceRecord, error) {
 	path := fmt.Sprintf("%s/%d", db.versionedBasePath(serviceRecordPath), id)
 	fmt.Println("path", path)
 	return performHttpReq[types.ServiceRecord](http.MethodGet, path, db.headers, nil, db.httpClient)
